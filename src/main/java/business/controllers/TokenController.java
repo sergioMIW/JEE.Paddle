@@ -31,18 +31,21 @@ public class TokenController {
     public String login(String username) {
         User user = userDao.findByUsernameOrEmail(username);
         assert user != null;
-        //TODO:Comprobar si el usuario logeado tiene un token valido
-    
-        //String last_token = tokenDao.findLastToken(user)
-        //String seconds24hours = XXXXXX
-        //if(last_token >  seconds24hours)
-        //  renovar token
-        //else
-        // recoger token y enviar
-        
-        
-        Token token = new Token(user);
-        tokenDao.save(token);
+        // TODO:Comprobar si el usuario logeado tiene un token valido
+        Token token = null;
+        int last_token = tokenDao.findByUserLastConnection(user);
+        int seconds24hours = 3600;
+        if (last_token > seconds24hours) {
+            // renovar token
+            token = new Token(user);
+            tokenDao.save(token);
+        }
+
+        else {
+            // recoger token y enviar
+
+        }
+
         return token.getValue();
     }
 }
