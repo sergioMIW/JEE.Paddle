@@ -1,5 +1,7 @@
 package business.controllers;
 
+import java.util.Date;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,17 +35,18 @@ public class TokenController {
         assert user != null;
         // TODO:Comprobar si el usuario logeado tiene un token valido
         Token token = null;
-        int last_token = tokenDao.findByUserLastConnection(user);
-        int seconds24hours = 3600;
-        if (last_token > seconds24hours) {
-            // renovar token
+        token = tokenDao.findByUserLastConnection(user);
+        long last_token_msec = token.getLastConnection();
+        long misecsNow = (new Date().getTime());
+        double diffeHours = (last_token_msec - misecsNow) / 1000 / 60 / 60;
+        double hours = 24;
+
+        // El tiempo de token excede 24horas
+        if (diffeHours > hours) {
             token = new Token(user);
+            // refresh the token
+            token.setLastConnection(misecsNow);
             tokenDao.save(token);
-        }
-
-        else {
-            // recoger token y enviar
-
         }
 
         return token.getValue();

@@ -11,6 +11,6 @@ public interface TokenDao extends JpaRepository<Token, Integer> {
     Token findByUser(User user);
     
     @Query("select lastConnection from Token token where user.username = ?1")
-    public int findByUserLastConnection(User user);
+    Token findByUserLastConnection(User user);
     
 }

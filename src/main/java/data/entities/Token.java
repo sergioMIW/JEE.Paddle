@@ -24,7 +24,7 @@ public class Token {
     private User user;
 
     @Column(unique = false, nullable = false)
-    private int lastConnection;
+    private long lastConnection;
 
     public Token() {
     }
@@ -48,11 +48,11 @@ public class Token {
         return user;
     }
 
-    public int getLastConnection() {
+    public long getLastConnection() {
         return lastConnection;
     }
 
-    public void setLastConnection(int lastConnection) {
+    public void setLastConnection(long lastConnection) {
         this.lastConnection = lastConnection;
     }
 
