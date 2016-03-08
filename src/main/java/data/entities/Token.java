@@ -23,7 +23,7 @@ public class Token {
     @JoinColumn
     private User user;
 
-    @Column(unique = false, nullable = false)
+    @Column(nullable = false)
     private long lastConnection;
 
     public Token() {
@@ -34,6 +34,7 @@ public class Token {
         this.user = user;
         this.value = new Encrypt()
                 .encryptInBase64UrlSafe("" + user.getId() + user.getUsername() + Long.toString(new Date().getTime()) + user.getPassword());
+        this.lastConnection = new Date().getTime();
     }
 
     public int getId() {
