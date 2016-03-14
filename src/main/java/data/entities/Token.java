@@ -69,8 +69,13 @@ public class Token {
         return id == ((Token) obj).id;
     }
 
+    
+    public boolean isValidTime(){
+        return ((Calendar.getInstance().getTimeInMillis() - lastConnection.getTimeInMillis()) > (60*60*1000));
+    }
+    
     @Override
     public String toString() {
-        return "Token [id=" + id + ", value=" + value + ", userId=" + user.getId() + "]";
+        return "Token [id=" + id + ", value=" + value + ", userId=" + user.getId() + ", lastConnection=" + lastConnection +  "]";
     }
 }
