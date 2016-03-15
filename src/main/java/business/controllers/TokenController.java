@@ -27,8 +27,6 @@ public class TokenController {
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
-    
-    
 
     public String login(String username) {
         User user = userDao.findByUsernameOrEmail(username);
