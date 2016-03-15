@@ -23,9 +23,9 @@ public class Token {
     @ManyToOne
     @JoinColumn
     private User user;
-    
-    @Column(unique = false,nullable = false)
-    private Calendar lastConnection;
+
+    @Column(unique = false, nullable = false)
+    private Calendar createConnection;
 
     public Token() {
     }
@@ -33,9 +33,9 @@ public class Token {
     public Token(User user) {
         assert user != null;
         this.user = user;
-        this.value = new Encrypt().encryptInBase64UrlSafe("" + user.getId() + user.getUsername() + Long.toString(new Date().getTime())
-                + user.getPassword());
-        this.lastConnection = Calendar.getInstance();
+        this.value = new Encrypt()
+                .encryptInBase64UrlSafe("" + user.getId() + user.getUsername() + Long.toString(new Date().getTime()) + user.getPassword());
+        this.createConnection = Calendar.getInstance();
     }
 
     public int getId() {
@@ -69,13 +69,21 @@ public class Token {
         return id == ((Token) obj).id;
     }
 
-    
-    public boolean isValidTime(){
-        return ((Calendar.getInstance().getTimeInMillis() - lastConnection.getTimeInMillis()) > (60*60*1000));
+    public Calendar getCreateConnection() {
+        return createConnection;
     }
+
     
+    public void setCreateConnection(Calendar createConnection) {
+        this.createConnection = createConnection;
+    }
+
+    public boolean isValidTime() {
+        return ((Calendar.getInstance().getTimeInMillis() - createConnection.getTimeInMillis()) > (60 * 60 * 1000));
+    }
+
     @Override
     public String toString() {
-        return "Token [id=" + id + ", value=" + value + ", userId=" + user.getId() + ", lastConnection=" + lastConnection +  "]";
+        return "Token [id=" + id + ", value=" + value + ", userId=" + user.getId() + ", createConnection=" + createConnection + "]";
     }
 }
