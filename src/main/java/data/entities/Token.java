@@ -73,7 +73,6 @@ public class Token {
         return createConnection;
     }
 
-    
     public void setCreateConnection(Calendar createConnection) {
         this.createConnection = createConnection;
     }
