@@ -26,6 +26,8 @@ public class Token {
 
     @Column(unique = false, nullable = false)
     private Calendar createConnection;
+    
+    public final int TIME_TO_EXPIRED = 3600;
 
     public Token() {
     }
@@ -78,7 +80,7 @@ public class Token {
     }
 
     public boolean isValidTime() {
-        return ((Calendar.getInstance().getTimeInMillis() - createConnection.getTimeInMillis()) > (60 * 60 * 1000));
+        return ((Calendar.getInstance().getTimeInMillis() - createConnection.getTimeInMillis()) > TIME_TO_EXPIRED);
     }
 
     @Override
