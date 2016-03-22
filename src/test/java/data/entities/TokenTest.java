@@ -18,21 +18,28 @@ public class TokenTest {
     }
 
     @Test
-    public void testTokenIsExpired() {
+    public void testTokenIsValid() {
+        User user = new User("u", "u@gmail.com", "p", Calendar.getInstance());
+        Token token = new Token(user);
+        assertTrue(token.isValidTime());
+    }
+
+    @Test
+    public void testTokenIsValidSetTime() {
         User user = new User("u", "u@gmail.com", "p", Calendar.getInstance());
         Token token = new Token(user);
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date()); // sets calendar time/date
-        calendar.add(Calendar.HOUR_OF_DAY, -2); // less two hour
         token.setCreateConnection(calendar);
         assertTrue(token.isValidTime());
     }
 
     @Test
-    public void testTokenIsNotExpired() {
+    public void testTokenIsNotValidSetTime() {
         User user = new User("u", "u@gmail.com", "p", Calendar.getInstance());
         Token token = new Token(user);
         Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date()); // sets calendar time/date
+        calendar.add(Calendar.HOUR_OF_DAY, -2); // less two hour
         token.setCreateConnection(calendar);
         assertFalse(token.isValidTime());
     }

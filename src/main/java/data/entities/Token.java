@@ -80,7 +80,7 @@ public class Token {
     }
 
     public boolean isValidTime() {
-        return ((Calendar.getInstance().getTimeInMillis() - createConnection.getTimeInMillis()) > TIME_TO_EXPIRED);
+        return ((Calendar.getInstance().getTimeInMillis() - createConnection.getTimeInMillis()) <= TIME_TO_EXPIRED);
     }
 
     @Override
