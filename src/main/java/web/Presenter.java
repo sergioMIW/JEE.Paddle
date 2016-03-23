@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
+import data.entities.Court;
+
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
 @SessionAttributes("name")
@@ -54,19 +56,27 @@ public class Presenter {
         return theme + "/home";
     }
 
-    @RequestMapping("/create-theme")
-    public ModelAndView theme(@RequestParam String theme) {
-        this.theme = theme;
-        return new ModelAndView(theme + "/home", "themes", THEMES);
+    @RequestMapping(value = "/create-court", method = RequestMethod.GET)
+    public String createCourt(Model model) {
+        model.addAttribute("court", new Court(CourtService.generateId()));
+        model.addAttribute("active", CourtService.activeCourtMap());
+        return theme + "/createUser";
+    }
+    
+    @RequestMapping(value = "/create-court", method = RequestMethod.POST)
+    public String createCourtSubmit(@Valid Court court, BindingResult bindingResult, Model model) {
+        if (!bindingResult.hasErrors()) {
+            if (CourtService.save(court)) {
+                model.addAttribute("id", court.getId());
+                return theme + "/registrationSuccess";
+            } else {
+                bindingResult.rejectValue("id", "error.court", "Court ya existente");
+            }
+        }
+        model.addAttribute("active", CourtService.activeCourtMap());
+        return theme + "/createCourt";
     }
 
-    @RequestMapping(value = "/greeting")
-    public String greeting(@CookieValue("JSESSIONID") Cookie cookie, HttpServletRequest request, Model model) {
-        model.addAttribute("stringList", Arrays.asList("uno", "dos", "tres"));
-        model.addAttribute("cookie", cookie.getName());
-        model.addAttribute("ip", request.getRemoteAddr());
-        return theme + "/greeting";
-    }
 
 
     
