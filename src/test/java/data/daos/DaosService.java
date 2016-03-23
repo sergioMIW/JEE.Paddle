@@ -107,7 +107,7 @@ public class DaosService {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date()); // sets calendar time/date
             calendar.add(Calendar.HOUR_OF_DAY, -2); // less two hour
-            token.setCreateConnection(calendar);
+            token.setCreateConnection(calendar.getTimeInMillis());
             tokenDao.save(token);
             tokenList.add(token);
         }

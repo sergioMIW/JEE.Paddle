@@ -25,7 +25,7 @@ public class Token {
     private User user;
 
     @Column(unique = false, nullable = false)
-    private Calendar createConnection;
+    private long createConnection;
     
     public final int TIME_TO_EXPIRED = 3600;
 
@@ -37,7 +37,7 @@ public class Token {
         this.user = user;
         this.value = new Encrypt()
                 .encryptInBase64UrlSafe("" + user.getId() + user.getUsername() + Long.toString(new Date().getTime()) + user.getPassword());
-        this.createConnection = Calendar.getInstance();
+        this.createConnection = Calendar.getInstance().getTimeInMillis();
     }
 
     public int getId() {
@@ -71,16 +71,16 @@ public class Token {
         return id == ((Token) obj).id;
     }
 
-    public Calendar getCreateConnection() {
+    public long getCreateConnection() {
         return createConnection;
     }
 
-    public void setCreateConnection(Calendar createConnection) {
+    public void setCreateConnection(long createConnection) {
         this.createConnection = createConnection;
     }
 
     public boolean isValidTime() {
-        return ((Calendar.getInstance().getTimeInMillis() - createConnection.getTimeInMillis()) <= TIME_TO_EXPIRED);
+        return ((Calendar.getInstance().getTimeInMillis() - createConnection) <= TIME_TO_EXPIRED);
     }
 
     @Override
