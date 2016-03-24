@@ -36,6 +36,9 @@ public class Presenter {
 
     @Autowired
     private ServletContext servletContext;
+    
+    @Autowired
+    private CourtService courtService;
 
    
     private String theme = THEMES.get(0);
@@ -58,22 +61,22 @@ public class Presenter {
 
     @RequestMapping(value = "/create-court", method = RequestMethod.GET)
     public String createCourt(Model model) {
-        model.addAttribute("court", new Court(CourtService.generateId()));
-        model.addAttribute("active", CourtService.activeCourtMap());
-        return theme + "/createUser";
+        model.addAttribute("court", new Court(courtService.generateId()));
+        model.addAttribute("active", courtService.activeCourtMap());
+        return theme + "/createCourt";
     }
     
     @RequestMapping(value = "/create-court", method = RequestMethod.POST)
     public String createCourtSubmit(@Valid Court court, BindingResult bindingResult, Model model) {
         if (!bindingResult.hasErrors()) {
-            if (CourtService.save(court)) {
+            if (courtService.save(court)) {
                 model.addAttribute("id", court.getId());
                 return theme + "/registrationSuccess";
             } else {
                 bindingResult.rejectValue("id", "error.court", "Court ya existente");
             }
         }
-        model.addAttribute("active", CourtService.activeCourtMap());
+        model.addAttribute("active", courtService.activeCourtMap());
         return theme + "/createCourt";
     }
 

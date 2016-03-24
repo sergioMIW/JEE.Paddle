@@ -11,11 +11,11 @@ import data.entities.Court;
 @Service
 public class CourtService {
 
-    private static List<Court> courtList;
+    private List<Court> courtList;
 
-    private static int id;
+    private int id;
 
-    private int active;
+    private Boolean active;
 
     public List<Court> findAll() {
         return courtList;
@@ -30,7 +30,7 @@ public class CourtService {
         return null;
     }
 
-    public static boolean save(Court court) {
+    public boolean save(Court court) {
         if (courtList.contains(court)) {
             return false;
         } else {
@@ -43,22 +43,22 @@ public class CourtService {
         courtList.remove(new Court(id));
     }
 
-    public static int generateId() {
+    public int generateId() {
         return id++;
     }
     
-    public static Map<String, String> activeCourtMap() {
-        Map<String, String> activeCourtMap = new HashMap<>();
-        activeCourtMap.put("1", "Activo");
-        activeCourtMap.put("0", "Inactivo");
+    public Map<Integer, String> activeCourtMap() {
+        Map<Integer, String> activeCourtMap = new HashMap<>();
+        activeCourtMap.put(1, "Activo");
+        activeCourtMap.put(0, "Inactivo");
         return activeCourtMap;
     }
 
-    public int getActive() {
+    public Boolean getActive() {
         return active;
     }
 
-    public void setActive(int active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 

@@ -16,10 +16,12 @@
 		</p>
 	
 		<p>Activo:
-			<form:checkboxes path="active" items="${activeCourtMap}" />
+			<form:select path="active" items="${activeCourtMap}" />
 		</p>
 		
-		<p><input type="submit" value="Crear"></p>
+		<p>
+		  <input type="submit" value="Crear">
+		</p>
 	</form:form>
 
 	<a href="<c:url value="/home"/>">Home</a>
