@@ -17,7 +17,7 @@ public class UserDaoImpl implements UserDaoExtended {
         User user = userDao.findByTokenValue(usernameOrEmailOrTokenValue);
         if (user != null) {
             Token token = tokenDao.findByUser(user);
-            if (token.isValidTime())
+            if (token != null && token.isValidTime())
                 return user;
         }
         return null;
