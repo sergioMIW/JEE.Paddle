@@ -81,6 +81,13 @@ public class Presenter {
     }
 
 
+    @RequestMapping("/court-list")
+    public ModelAndView listUsers() {
+        ModelAndView modelAndView = new ModelAndView(theme + "/courtList");
+        modelAndView.addObject("courtList", courtService.findAll());
+        return modelAndView;
+    }
+
 
     
 

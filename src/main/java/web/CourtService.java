@@ -1,5 +1,6 @@
 package web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +18,14 @@ public class CourtService {
 
     private Boolean active;
 
+    public CourtService() {
+        courtList = new ArrayList<>();
+        id=0;
+    }
+
     public List<Court> findAll() {
         return courtList;
+        
     }
 
     public Court findOne(int id) {
@@ -35,7 +42,9 @@ public class CourtService {
             return false;
         } else {
             courtList.add(court);
+            this.id++;
             return true;
+
         }
     }
 
@@ -46,11 +55,11 @@ public class CourtService {
     public int generateId() {
         return id++;
     }
-    
-    public Map<Integer, String> activeCourtMap() {
-        Map<Integer, String> activeCourtMap = new HashMap<>();
-        activeCourtMap.put(1, "Activo");
-        activeCourtMap.put(0, "Inactivo");
+
+    public Map<Boolean, String> activeCourtMap() {
+        Map<Boolean, String> activeCourtMap = new HashMap<>();
+        activeCourtMap.put(true, "Activo");
+        activeCourtMap.put(false, "Inactivo");
         return activeCourtMap;
     }
 
