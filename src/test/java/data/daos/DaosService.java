@@ -65,8 +65,9 @@ public class DaosService {
         date.set(Calendar.MILLISECOND, 0);
         for (int i = 0; i < 4; i++) {
             date.add(Calendar.HOUR_OF_DAY, 1);
-            reserveDao.save(new Reserve(courtDao.findOne(i+1), users[i], date));
+            reserveDao.save(new Reserve(courtDao.findOne(i + 1), users[i], date));
         }
+
         users = this.createPlayers(8, 2);
         for (User user : users) {
             map.put(user.getUsername(), user);
@@ -75,8 +76,6 @@ public class DaosService {
             map.put("t" + token.getUser().getUsername(), token);
         }
     }
-
-   
 
     public User[] createPlayers(int initial, int size) {
         User[] users = new User[size];
@@ -98,7 +97,7 @@ public class DaosService {
         }
         return tokenList;
     }
-    
+
     private List<Token> createInvalidTokens(User[] users) {
         List<Token> tokenList = new ArrayList<>();
         Token token;
