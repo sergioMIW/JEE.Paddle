@@ -45,4 +45,21 @@ public class UserDaoITest {
         assertEquals(u1, userDao.findByTokenValue(t1.getValue()));
         assertNull(userDao.findByTokenValue("kk"));
     }
+    
+    @Test
+    public void testFindByTokenValueIsValid() {
+        User u1 = (User) daosService.getMap().get("u1");
+        Token t1 = (Token) daosService.getMap().get("tu1");
+        assertEquals(u1, userDao.findByTokenValueIsValid(t1.getValue()));
+        assertNull(userDao.findByTokenValueIsValid("kk"));
+        //INVALID
+        //USER NOT TOKEN
+        User u4 = (User) daosService.getMap().get("u4");
+        assertNull(userDao.findByTokenValueIsValid(u4.getEmail()));
+        //USER HAS TOKEN BUT EXPIRED
+        User u8 = (User) daosService.getMap().get("u8");
+        assertNull(userDao.findByTokenValueIsValid(u8.getEmail()));
+        Token t8 = (Token) daosService.getMap().get("tu8");
+        assertNull(userDao.findByTokenValueIsValid(t8.getValue()));
+    }
 }

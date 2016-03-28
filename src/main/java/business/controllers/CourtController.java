@@ -52,4 +52,14 @@ public class CourtController {
         return courtDao.findOne(courtId) != null;
     }
 
+    public boolean delete(int courtId) {
+        Court court = courtDao.findOne(courtId);
+        if (court != null) {
+            courtDao.delete(court);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
