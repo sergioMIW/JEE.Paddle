@@ -1,137 +1,183 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name="description" content="MIW. Spring 4 MVC">
-<meta name="author" content="J.Bernal">
-<link href="<c:url value='/static/css/bootstrap.css' />"
-	rel="stylesheet" />
-<link href="<c:url value='/static/css/carousel.css' />" rel="stylesheet" />
-<title>Spring 4 MVC. Home</title>
-</head>
-<body>
-	<div class="navbar-wrapper">
-		<div class="container">
-			<nav class="navbar navbar-inverse navbar-static-top">
-				<div class="container">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed"
-							data-toggle="collapse" data-target="#navbar"
-							aria-expanded="false" aria-controls="navbar">
-							<span
-								class="icon-bar"></span><span class="icon-bar"></span> <span
-								class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="#">Spring MVC</a>
-					</div>
-					<div id="navbar" class="navbar-collapse collapse">
-						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Home</a></li>
-							<li><a href="<c:url value="/greeting"/>">Empezar</a></li>
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown" role="button" aria-haspopup="true"
-								aria-expanded="false">Usuario<span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li class="dropdown-header">CRUD</li>
-									<li><a href="<c:url value='/user-list'/>">Listar</a></li>
-									<li><a href="<c:url value="/create-user"/>">Crear</a></li>
-								</ul></li>
-						</ul>
-						<ul class="nav navbar-nav navbar-right">
-							<c:forEach items="${themes}" var="theme">
-								<li><a class="btn btn-default btn-xs"
-									href="<c:url value="create-theme?theme=${theme}"/>">${theme}</a></li>;
-							</c:forEach>
-						</ul>
-					</div>
-				</div>
-			</nav>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	class=" js no-touch generatedcontent csstransforms csstransforms3d csstransitions">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Club de padel</title>
 
-		</div>
-	</div>
 
-	<!-- Carousel
-    ================================================== -->
-	<div id="myCarousel" class="carousel slide" data-ride="carousel">
-		<!-- Indicators -->
-		<ol class="carousel-indicators">
-			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			<li data-target="#myCarousel" data-slide-to="1"></li>
-			<li data-target="#myCarousel" data-slide-to="2"></li>
-		</ol>
-		<div class="carousel-inner" role="listbox">
-			<div class="item active">
-				<img class="first-slide"
-					src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-					alt="First slide">
-				<div class="container">
-					<div class="carousel-caption">
-						<h1>Empezar con Spring MVC</h1>
-						<p>Se realiza una petici�n al dispatcher, este delega en el
-							controlador. El controlador traslada a la capa de negocio la
-							petici�n y obtiene los resultados. Prepara los datos de
-							presentaci�n sobre el objeto Model y devuelve el control al
-							dispatcher. El dispatcher, solicita al ViewResolver que resuelva
-							la vista a presentar y le da el control a la vista. La vista los
-							presenta a partir de los datos del objeto Model</p>
+		<meta name="author" content="Sergio Gil Jimenez">
+		<meta name="keywords"
+			content="Tennis, club, events, football, golf, non-profit, betting assistant, football,fitness, tennis, sport, soccer, goal, sports, volleyball, basketball,	charity, club, cricket, football, hockey, magazine, non profit, rugby, soccer, sport, sports, tennis">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link href="<c:url value='/static/css/bootstrap.css'/>" rel="stylesheet" type="text/css">
+		<!--<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />-->
+
+
+		<link href="<c:url value='/static/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css">
+		<!--Clients-->
+		<link href="<c:url value='/static/css/owl.carousel.css'/>" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/static/css/owl.theme.css'/>" rel="stylesheet" type="text/css">
+
+
+		<link href="<c:url value='/static/css/jquery.bxslider.css'/>" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/static/css/jquery.jscrollpane.css'/>" rel="stylesheet" type="text/css">
+
+		<link href="<c:url value='/static/css/flexslider.css'/>" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/static/css/component.css'/>" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/static/css/prettyPhoto.css'/>" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/static/css/style_dir.css'/>" rel="stylesheet" type="text/css">
+		<link rel="shortcut icon" type="<c:url value='/static/image/png'/>" href="img/favicon.ico">
+		<link href="<c:url value='/static/css/responsive.css'/>" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/static/css/animate.css'/>" rel="stylesheet" type="text/css">
+
+		<link href="<c:url value='/static/css/main.css'/>" rel="stylesheet" type="text/css">
+
+				
+		<style id="holderjs-style" type="text/css"></style>
+		
+			
+	</head>
+	
+	<body>
+		<!--SECTION TOP LOGIN-->
+		<section class="content-top-login">
+			<div class="container">
+				<div class="col-md-12">
+
+				
+				</div>
+			</div>
+		</section>
+		<!--SECTION MENU -->
+		<section class="container box-logo">
+			<header>
+				<div class="content-logo col-md-12">
+					<div class="bt-menu">
+						<a href="index.html#" class="menu"><span></span> Menu</a>
+					</div>
+
+					<div class="box-menu">
+
+						<nav id="cbp-hrmenu" class="cbp-hrmenu">
+							<ul id="menu">
+							     <li><a class="lnk-menu active" href="#">Home</a></li>
+							     <li><a class="lnk-menu" href="<c:url value='/court-list'/>">Listar pistas</a></li>
+                                <li><a class="lnk-menu" href="<c:url value='/create-court'/>">Crear pista</a></li>
+                                <li><a class="lnk-menu" href="<c:url value="/select-theme/0"/>">Sin estilos</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</header>
+		</section>
+
+
+		<section class="drawer ng-scope">
+		
+		<div class="col-md-12 size-img back-img">
+            <div class="effect-cover">
+            <h3 class="txt-advert animated fadeInUp">Pistas</h3>
+            <p class="txt-advert-sub animated">Gesti�n de pistas Indoor Padel.</p>
+            </div>
+        </div>
+        
+		<div style="height:500px"></div>
+	
+
+		 
+		<!--SECTION FOOTER-->
+		<section id="footer-tag">
+			<div class="container">
+				<div class="col-md-12">
+					<div class="col-md-5">
+						<h3>Acerca de Nosotros</h3>
+						<p>Indoor Pádel pone a tu disposición 2100 m² de las mejores instalaciones, 6 pistas de pádel de cristal, 
+						zona vending climatizada, wifi y una gran terraza con vistas a las pistas, donde podrás disfrutar de los mejores partidos de pádel.</p>
 						<p>
-							<a class="btn btn-lg btn-primary"
-								href="<c:url value="/greeting"/>" role="button">Probar</a>
-						</p>
+						El principal objetivo es crear un club para todos y para ello nuestra principal apuesta será la creación de una gran escuela de pádel,
+						donde todo el mundo pueda tener la oportunidad, tanto de aprender como de jugar, como de perfeccionar su juego, y poder disfrutar al máximo 
+						del mejor deporte del mundo. TE ESPERAMOS</p>
+					</div>
+					<div class="col-md-5 cat-footer">
+						<div class="footer-map"></div>
+						<h3 class="last-cat">Teléfono: 91 XXX XX XX XX</h3>
+						<ul class="last-tips">
+							<li><a href="#">contacto@indoorpadel.com</a></li>
+							<li><a href="#">L-V: 10:00 - 14:30 y 17:00 - 23:00</a></li>
+							<li><a href="#">S-D: 10h - 14:30 y 17:00 - 22:00</a></li>
+							
+						</ul>
+					</div>
+					
+					
+					<div class="col-xs-12">
+						<ul class="social">
+							<li><a href=""><i class="fa fa-facebook"></i></a></li>
+							<li><a href=""><i class="fa fa-twitter"></i></a></li>
+							<li><a href=""><i class="fa fa-linkedin"></i></a></li>
+							<li><a href=""><i class="fa fa-digg"></i></a></li>
+							<li><a href=""><i class="fa fa-rss"></i></a></li>
+							<li><a href=""><i class="fa fa-youtube"></i></a></li>
+							<li><a href=""><i class="fa fa-tumblr"></i></a></li>
+
+						</ul>
 					</div>
 				</div>
 			</div>
-			<div class="item">
-				<img class="second-slide"
-					src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-					alt="Second slide">
-				<div class="container">
-					<div class="carousel-caption">
-						<h1>Listar usuarios</h1>
-						<p>Muestra una tabla con la lista completa de usuarios</p>
-						<p>
-							<a class="btn btn-lg btn-primary"
-								href="<c:url value="/user-list"/>" role="button">Probar</a>
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<img class="third-slide"
-					src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-					alt="Third slide">
-				<div class="container">
-					<div class="carousel-caption">
-						<h1>Crear usuario</h1>
-						<p>Saca un formulario para crear un nuevo usuario</p>
-						<p>
-							<a class="btn btn-lg btn-primary"
-								href="<c:url value="/create-user"/>" role="button">probar</a>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<a class="left carousel-control" href="#myCarousel" role="button"
-			data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"
-			aria-hidden="true"></span> <span class="sr-only">Anterior</span>
-		</a> <a class="right carousel-control" href="#myCarousel" role="button"
-			data-slide="next"> <span
-			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			<span class="sr-only">Pr�ximo</span>
-		</a>
+		</section>
 		<footer>
-			<p>&nbsp;&nbsp;&copy; UPM-MIW --- ${now}</p>
+			<div class="col-md-12 content-footer">
+				<p>©Todos los derechos reservados</p>
+			</div>
 		</footer>
-	</div>
-	<!-- ============================= -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="<c:url value='/static/js/bootstrap.js' />"></script>
-</body>
+		</section>
+
+
+
+
+
+		<script src="<c:url value='/static/js/jquery-1.10.2.js'/>" type="text/javascript"></script>
+		<script src="<c:url value='/static/js/jquery-migrate-1.2.1.min.js'/>" type="text/javascript"></script>
+		<script src="<c:url value='/static/js/jquery.transit.min.js'/>" type="text/javascript"></script>
+
+		<!--MENU-->
+		<script src="<c:url value='/static/js/modernizr.custom.js'/>" type="text/javascript"></script>
+		<script src="<c:url value='/static/js/cbpHorizontalMenu.js'/>" type="text/javascript"></script>
+		<!--END MENU-->
+
+		<!--Mini Flexslide-->
+		<script src="<c:url value='/static/js/jquery.flexslider.js'/>" type="text/javascript"></script>
+
+
+
+		<!--Gallery-->
+		<script src="<c:url value='/static/js/jquery.prettyPhoto.js'/>" type="text/javascript"></script>
+		<script src="<c:url value='/static/js/isotope.js'/>" type="text/javascript"></script>
+
+		<!-- Button Anchor Top-->
+		<script src="<c:url value='/static/js/jquery.ui.totop.js'/>" type="text/javascript"></script>
+		<script src="<c:url value='/static/js/custom.js'/>" type="text/javascript"></script>
+		<script src="<c:url value='/static/js/jquery.bxslider.js'/>" type="text/javascript"></script>
+
+
+		<!--Carousel Clients-->
+		<script src="<c:url value='/static/js/owl.carousel.js'/>" type="text/javascript"></script>
+
+		<!--Count down-->
+		<script src="<c:url value='/static/js/jquery.countdown.js'/>" type="text/javascript"></script>
+
+		<script src="<c:url value='/static/js/custom_ini.js'/>" type="text/javascript"></script>
+
+
+		<script src="<c:url value='/static/js/main.js'/>" type="text/javascript"></script>
+
+
+
+		<a href="index.html#" id="toTop" style="display: none;"><span
+			id="toTopHover"></span>To Top</a>
+	</body>
 </html>

@@ -9,6 +9,8 @@
 
 <body>
     <H1>Listado de pistas</H1>
+    
+    <span>${courtDelete}</span> 
 	<table border="1">
 		<thead>
 			<tr>
@@ -20,10 +22,10 @@
 		<tbody>
 			<c:forEach items="${courtList}" var="court">
 				<tr>
-					<td>${court.id}</td>
+					<td>${court.courtId}</td>
 					<td>${court.active}</td>
 					
-					<td><a href="<c:url value='/delete-court/${court.id}' />">delete</a></td>
+					<td><a href="<c:url value='/delete-court/${court.courtId}' />">delete</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

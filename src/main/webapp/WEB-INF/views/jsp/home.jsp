@@ -7,17 +7,20 @@
 <title>Spring 4 MVC. Home</title>
 </head>
 <body>
-	<H1>Página principal con vista: JSTL + JSP + Spring tags</H1>
+	<H1>Página principal</H1>
 
-	<h3>ViewResolver</h3>
-	<p>
-	   <c:forEach items="${themes}" var="theme">
-	       <a href="<c:url value="create-theme?theme=${theme}"/>">${theme}</a>;
-	   </c:forEach></p>
-
-	<h3>Ejercicios:</h3>
-	<p><a href="<c:url value='/court-list'/>">- Lista de pistas</a></p>
-    <p><a href="<c:url value='/create-court'/>">- Crear una pista</a></p>
+	<h3>Vistas</h3>
+	  
+       
+     <a href="<c:url value="/select-theme/1"/>">Ir a la pagina con estilos</a>
+     <br></br>
+     <a href="<c:url value="/select-theme/0"/>">Ir a la pagina sin estilos</a>
+    
+   
+	
+	<h3>Acciones</h3>
+	<p><a href="<c:url value='/court-list'/>">Lista de pistas</a></p>
+    <p><a href="<c:url value='/create-court'/>">Crear una pista</a></p>
 	<p>UPM-MIW --- ${now}</p>
 </body>
 </html>

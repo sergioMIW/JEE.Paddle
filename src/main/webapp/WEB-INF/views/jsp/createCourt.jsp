@@ -11,12 +11,12 @@
 	<h1>Crear una pista</h1>
 	<form:form action="create-court" modelAttribute="court">
 		<p>Id:
-			<form:input path="id" placeholder="Id" required="required" />
-			<form:errors path="id" cssClass="error" />
+			<form:input path="courtId" placeholder="Id" required="required" />
+			<form:errors path="courtId" cssClass="error" />
 		</p>
 	
 		<p>Activo:
-			<form:select path="active" items="${activeCourtMap}" />
+			<form:select path="active" items="${selectActiveOptions}" />
 		</p>
 		
 		<p>
