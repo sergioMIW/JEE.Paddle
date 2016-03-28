@@ -31,12 +31,9 @@ public class Presenter {
 
     private static final List<String> THEMES = Arrays.asList("jsp", "bootstrap");
 
-    
-    
     @Autowired
     private CourtController courtController;
 
-   
     private String theme = THEMES.get(0);
 
     public Presenter() {
@@ -48,12 +45,11 @@ public class Presenter {
         return new SimpleDateFormat("EEEE, d MMM yyyy HH:mm:ss").format(new Date());
     }
 
-    
     @RequestMapping("/home")
     public String style(Model model) {
         model.addAttribute("themes", THEMES);
         model.addAttribute("selectOptions", activeThemeMap());
-        //La vista resultante no lleva extensión (.jsp) configurado en WebConfig.java
+        // La vista resultante no lleva extensión (.jsp) configurado en WebConfig.java
         return theme + "/home";
     }
 
@@ -64,22 +60,21 @@ public class Presenter {
         model.addAttribute("selectActiveOptions", activeCourtMap());
         return theme + "/createCourt";
     }
-    
+
     @RequestMapping(value = "/create-court", method = RequestMethod.POST)
-    public String createCourtSubmit(@ModelAttribute(value = "court")  CourtState  court, BindingResult bindingResult, Model model) {
+    public String createCourtSubmit(@ModelAttribute(value = "court") CourtState court, BindingResult bindingResult, Model model) {
         if (!bindingResult.hasErrors()) {
             if (courtController.createCourt(court.getCourtId())) {
-                //courtController.changeCourtActivation(court.getCourtId(), court.isActive());
+                // courtController.changeCourtActivation(court.getCourtId(), court.isActive());
                 model.addAttribute("court", court);
                 return theme + "/registrationSuccess";
             } else {
                 bindingResult.rejectValue("id", "error.courtId", "Court ya existente");
             }
         }
-       
+
         return theme + "/createCourt";
     }
-
 
     @RequestMapping("/court-list")
     public ModelAndView listCourts() {
@@ -87,28 +82,26 @@ public class Presenter {
         modelAndView.addObject("courtList", courtController.showCourts());
         return modelAndView;
     }
-    
-    
+
     @RequestMapping(value = {"/delete-court/{id}"})
     public String deleteCourt(@PathVariable int id, Model model) {
-        if(courtController.delete(id)){
+        if (courtController.delete(id)) {
             model.addAttribute("courtDelete", "Se ha borrado con exito");
-        }
-        else{
+        } else {
             model.addAttribute("courtDelete", "No ha sido posible eliminarlo");
         }
-      
+
         model.addAttribute("courtList", courtController.showCourts());
         return theme + "/courtList";
     }
-    
+
     public Map<Boolean, String> activeCourtMap() {
         Map<Boolean, String> activeCourtMap = new HashMap<>();
         activeCourtMap.put(true, "Activo");
         activeCourtMap.put(false, "Inactivo");
         return activeCourtMap;
     }
-    
+
     public Map<String, String> activeThemeMap() {
         Map<String, String> activeCourtMap = new HashMap<>();
         activeCourtMap.put("jsp", "jsp");
@@ -116,20 +109,14 @@ public class Presenter {
         return activeCourtMap;
     }
 
-    
-    public void setTheme(int themeID ) {
-        this.theme = THEMES.get(themeID);  
+    public void setTheme(int themeID) {
+        this.theme = THEMES.get(themeID);
     }
-    
+
     @RequestMapping(value = {"/select-theme/{id}"})
     public String setThemeView(@PathVariable int id) {
         setTheme(id);
         return theme + "/home";
     }
-    
-    
-
-
-    
 
 }
