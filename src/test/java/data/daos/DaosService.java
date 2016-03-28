@@ -2,6 +2,7 @@ package data.daos;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +65,15 @@ public class DaosService {
         date.set(Calendar.MILLISECOND, 0);
         for (int i = 0; i < 4; i++) {
             date.add(Calendar.HOUR_OF_DAY, 1);
-            reserveDao.save(new Reserve(courtDao.findOne(i+1), users[i], date));
+            reserveDao.save(new Reserve(courtDao.findOne(i + 1), users[i], date));
+        }
+
+        users = this.createPlayers(8, 2);
+        for (User user : users) {
+            map.put(user.getUsername(), user);
+        }
+        for (Token token : this.createInvalidTokens(users)) {
+            map.put("t" + token.getUser().getUsername(), token);
         }
     }
 
@@ -83,6 +92,21 @@ public class DaosService {
         Token token;
         for (User user : users) {
             token = new Token(user);
+            tokenDao.save(token);
+            tokenList.add(token);
+        }
+        return tokenList;
+    }
+
+    private List<Token> createInvalidTokens(User[] users) {
+        List<Token> tokenList = new ArrayList<>();
+        Token token;
+        for (User user : users) {
+            token = new Token(user);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date()); // sets calendar time/date
+            calendar.add(Calendar.HOUR_OF_DAY, -2); // less two hour
+            token.setCreateConnection(calendar.getTimeInMillis());
             tokenDao.save(token);
             tokenList.add(token);
         }

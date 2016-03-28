@@ -2,5 +2,5 @@ package data.daos;
 
 public interface TokenDaoExtended  {
 
-    public void deleteTokenExpired();
+    public void deleteNotValidToken();
 }
