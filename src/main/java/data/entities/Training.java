@@ -2,6 +2,7 @@ package data.entities;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -35,6 +36,10 @@ public class Training {
     private Calendar endDate;
 
     private final int hourTrainningByDefault = 1;
+
+    public Training() {
+        this.userList = new ArrayList<User>();
+    }
 
     public Training(Court court, Calendar initDate, User trainer) {
         super();
@@ -77,6 +82,29 @@ public class Training {
 
     public List<User> getUserList() {
         return userList;
+    }
+    
+    public User getUser(User user) {
+       int userIndex = userList.indexOf(user);
+       if(userIndex != -1)
+           return userList.get(userIndex);
+       else
+           return null;
+    }
+
+    public boolean addUser(User user) {
+        if (!userList.contains(user))
+            return this.userList.add(user);
+        else
+            return false;
+    }
+
+    public boolean removeUser(User user) {
+        return userList.remove(user);
+    }
+
+    public void removeAllUsers() {
+        this.userList.clear();
     }
 
     public void setUserList(List<User> userList) {
