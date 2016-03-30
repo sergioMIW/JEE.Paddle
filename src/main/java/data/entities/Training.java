@@ -23,6 +23,10 @@ public class Training {
     @JoinColumn
     private Court court;
 
+    @ManyToOne
+    @JoinColumn
+    private User trainer;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private List<User> userList;
 
@@ -32,11 +36,12 @@ public class Training {
 
     private final int hourTrainningByDefault = 1;
 
-    public Training(Court court, Calendar initDate) {
+    public Training(Court court, Calendar initDate, User trainer) {
         super();
         this.court = court;
         this.initDate = initDate;
         this.endDate = this.setHourByDefault(initDate);
+        this.trainer = trainer;
         this.userList = new ArrayList<User>();
     }
 
@@ -52,6 +57,14 @@ public class Training {
         Calendar aux = Calendar.getInstance();
         aux.add(Calendar.HOUR_OF_DAY, hourTrainningByDefault);
         return aux;
+    }
+
+    public User getTrainer() {
+        return trainer;
+    }
+
+    public void setTrainer(User trainer) {
+        this.trainer = trainer;
     }
 
     public Court getCourt() {
@@ -129,8 +142,8 @@ public class Training {
 
     @Override
     public String toString() {
-        return "Training [id=" + id + ", court=" + court + ", userList=" + userList + ", initDate=" + initDate + ", endDate=" + endDate
-                + ", hourTrainningByDefault=" + hourTrainningByDefault + "]";
+        return "Training [id=" + id + ", court=" + court + ", trainer=" + trainer + ", userList=" + userList + ", initDate=" + initDate
+                + ", endDate=" + endDate + ", hourTrainningByDefault=" + hourTrainningByDefault + "]";
     }
 
 }
