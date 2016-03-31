@@ -34,7 +34,7 @@ public class Training {
 
     private Calendar endDate;
 
-    private final int hourTrainningByDefault = 1;
+    private int hourTrainningByDefault = 1;
 
     public Training() {
         this.userList = new ArrayList<User>();
@@ -44,7 +44,16 @@ public class Training {
         super();
         this.court = court;
         this.initDate = initDate;
-        this.endDate = this.setHourByDefault(initDate);
+        this.endDate = setHourByDefault(initDate);
+        this.trainer = trainer;
+        this.userList = new ArrayList<User>();
+    }
+    
+    public Training(Court court, Calendar initDate,Calendar endDate, User trainer) {
+        super();
+        this.court = court;
+        this.initDate = initDate;
+        this.endDate = endDate;
         this.trainer = trainer;
         this.userList = new ArrayList<User>();
     }
@@ -57,10 +66,18 @@ public class Training {
         this.endDate = endDate;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     private Calendar setHourByDefault(Calendar calendar) {
-        Calendar aux = Calendar.getInstance();
-        aux.add(Calendar.HOUR_OF_DAY, hourTrainningByDefault);
-        return aux;
+        Calendar cal = calendar;
+        cal.add(Calendar.HOUR, hourTrainningByDefault);
+        return cal;
     }
 
     public User getTrainer() {
@@ -82,13 +99,13 @@ public class Training {
     public List<User> getUserList() {
         return userList;
     }
-    
+
     public User getUser(User user) {
-       int userIndex = userList.indexOf(user);
-       if(userIndex != -1)
-           return userList.get(userIndex);
-       else
-           return null;
+        int userIndex = userList.indexOf(user);
+        if (userIndex != -1)
+            return userList.get(userIndex);
+        else
+            return null;
     }
 
     public boolean addUser(User user) {

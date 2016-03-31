@@ -39,7 +39,7 @@ public class DaosService {
 
     @Autowired
     private ReserveDao reserveDao;
-    
+
     @Autowired
     private TrainingDao trainingDao;
 
@@ -135,9 +135,10 @@ public class DaosService {
         Calendar initDate;
 
         for (int i = 0; i < size; i++) {
-            initDate = new GregorianCalendar(2015, Calendar.JANUARY, 18, 10, 00, 00);
-            training[i] = new Training(courtDao.findOne(i+1), initDate, users[i]);
+            initDate = new GregorianCalendar(2016, Calendar.FEBRUARY, 18, 14, 00, 00);
+            training[i] = new Training(courtDao.findOne(i + 1), initDate, users[i]);
             trainingDao.save(training[i]);
+            
         }
         return training;
     }

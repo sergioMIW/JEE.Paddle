@@ -40,7 +40,6 @@ public class TokenDaoITest {
         tokenDao.deleteNotValidToken();
         numberToken = tokenDao.findAll().size();
         assertEquals(numberToken, 4);
-
     }
 
 }
