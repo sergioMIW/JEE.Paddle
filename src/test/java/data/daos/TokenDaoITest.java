@@ -37,9 +37,11 @@ public class TokenDaoITest {
         int numberToken = -1;
         numberToken = tokenDao.findAll().size();
         assertEquals(numberToken, 6);
+        int numberTokenAux = -1;
         tokenDao.deleteNotValidToken();
-        numberToken = tokenDao.findAll().size();
-        assertEquals(numberToken, 4);
+        numberTokenAux = tokenDao.findAll().size();
+        assertEquals(numberTokenAux, 4);
+       
     }
 
 }
