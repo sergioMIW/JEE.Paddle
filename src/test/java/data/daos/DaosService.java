@@ -3,6 +3,7 @@ package data.daos;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import data.entities.Court;
 import data.entities.Reserve;
 import data.entities.Role;
 import data.entities.Token;
+import data.entities.Training;
 import data.entities.User;
 import data.services.DataService;
 
@@ -37,6 +39,9 @@ public class DaosService {
 
     @Autowired
     private ReserveDao reserveDao;
+    
+    @Autowired
+    private TrainingDao trainingDao;
 
     @Autowired
     private DataService genericService;
@@ -67,7 +72,12 @@ public class DaosService {
             date.add(Calendar.HOUR_OF_DAY, 1);
             reserveDao.save(new Reserve(courtDao.findOne(i + 1), users[i], date));
         }
+        // Create trainning
+        for (Training training : this.createTraining(4, users)) {
+            map.put("tr" + training.getTrainer().getEmail(), training);
+        }
 
+        // Create invalid tokens
         users = this.createPlayers(8, 2);
         for (User user : users) {
             map.put(user.getUsername(), user);
@@ -75,6 +85,7 @@ public class DaosService {
         for (Token token : this.createInvalidTokens(users)) {
             map.put("t" + token.getUser().getUsername(), token);
         }
+
     }
 
     public User[] createPlayers(int initial, int size) {
@@ -117,6 +128,18 @@ public class DaosService {
         for (int id = 0; id < size; id++) {
             courtDao.save(new Court(id + initial));
         }
+    }
+
+    public Training[] createTraining(int size, User[] users) {
+        Training[] training = new Training[size];
+        Calendar initDate;
+
+        for (int i = 0; i < size; i++) {
+            initDate = new GregorianCalendar(2015, Calendar.JANUARY, 18, 10, 00, 00);
+            training[i] = new Training(courtDao.findOne(i+1), initDate, users[i]);
+            trainingDao.save(training[i]);
+        }
+        return training;
     }
 
     public Map<String, Object> getMap() {
