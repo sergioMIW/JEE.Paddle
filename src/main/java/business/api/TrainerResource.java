@@ -40,7 +40,6 @@ public class TrainerResource {
         if (!this.trainingController.createTraining(trainingWrapper)) {
             throw new ApiException("Error al crear el entrenamiento", 1);
         }
-
     }
 
     @RequestMapping(value = Uris.DELETE_TRAINING + Uris.ID, method = RequestMethod.DELETE)
