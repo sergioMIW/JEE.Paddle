@@ -40,10 +40,11 @@ public class RestService {
         new RestBuilder<Object>(URL).path(Uris.COURTS).param("id", id).basicAuth(this.loginAdmin(), "").post().build();
     }
 
-//    public void createTraining(Calendar initDate, Calendar endDate, int courtId, int userId) {
-//        TrainingWrapper trainingWrapper = new TrainingWrapper(initDate, endDate, courtId, userId);
-//        new RestBuilder<Object>(RestService.URL).path(Uris.TRAINING).basicAuth(this.loginTrainer(), "").body(trainingWrapper).post()
-//                .build();
-//    }
+    public void createTraining(Calendar initDate, Calendar endDate, int courtId, int trainerId) {
+        TrainingWrapper trainingWrapper = new TrainingWrapper(initDate, endDate, courtId, trainerId);
+        String token = this.loginTrainer();
+        new RestBuilder<Object>(RestService.URL).path(Uris.TRAINING).path(Uris.CREATE_TRAINING).basicAuth(token, "").body(trainingWrapper).post()
+                .build();
+    }
 
 }

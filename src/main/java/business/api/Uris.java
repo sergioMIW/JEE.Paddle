@@ -28,6 +28,6 @@ public class Uris {
 
     public static final String LIST_TRAININGS = "/list";
 
-    public static final String REGISTER_TRAINING = "/registerTraining";
+  
 
 }
