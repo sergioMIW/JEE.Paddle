@@ -4,19 +4,19 @@
 
 > Proyecto básicos para el uso de la tecnología Spring
 
-### Tecnologías necesarias
-* Java
-* Spring
-* Eclipse
-* Maven
-* MySQL
-* Tomcat
+### Ampliaciones
+* ECP1. Persistencia (30%)
+    Parte A,B y C
 
+* ECP1. Api (50%)
+    Parte A, B y C
+        En la parte C, me quedan validaciones en los TEST de Training
+        
+* ECP1. Web (20%)
+    Parte A
+        Con JSP (con y sin estilos)       
+        
 
-### Importar el proyecto mediante Eclipse
-1. Clonar mediante Eclipse este repositorio en la máquina local: https://youtu.be/rQNixJQQ25g
-1. Importar el repositorio clonado: https://youtu.be/yYvD8ZJtWwI
-1. Crear una Base de Datos llamada: `paddle`
 
 ### Documentación
 #### Casos de Uso
