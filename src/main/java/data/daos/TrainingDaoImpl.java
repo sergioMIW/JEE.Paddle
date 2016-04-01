@@ -47,10 +47,18 @@ public class TrainingDaoImpl implements TrainingDaoExtended {
     }
 
     @Override
-    public void addUserInTraining(Training training, User user) {
-        if (trainingDao.findByTraining(training) != null)
-            if (training.addUser(user))
+    public Boolean addUserInTraining(Training training, User user) {
+        if (trainingDao.findByTraining(training) != null){
+            if (training.addUser(user)){
                 trainingDao.save(training);
+                return true;
+            }
+            else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
 
     @Override

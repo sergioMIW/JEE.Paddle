@@ -9,7 +9,7 @@ public interface TrainingDaoExtended {
 
     public Boolean deleteTraining(Training training);
 
-    public void addUserInTraining(Training training, User user);
+    public Boolean addUserInTraining(Training training, User user);
 
     public Boolean deleteUserInTraining(Training training, User user);
 }

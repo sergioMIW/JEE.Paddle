@@ -1,7 +1,10 @@
 package api;
 
+import java.util.Calendar;
+
 import business.api.Uris;
 import business.wrapper.TokenWrapper;
+import business.wrapper.TrainingWrapper;
 import business.wrapper.UserWrapper;
 import business.wrapper.UserWrapperBuilder;
 
@@ -19,6 +22,12 @@ public class RestService {
         return token.getToken();
     }
 
+    public String loginTrainer() {
+        TokenWrapper token = new RestBuilder<TokenWrapper>(URL).path(Uris.TOKENS).basicAuth("trainer", "trainer").clazz(TokenWrapper.class)
+                .post().build();
+        return token.getToken();
+    }
+
     public String registerAndLoginPlayer() {
         UserWrapper player = new UserWrapperBuilder().build();
         new RestBuilder<Object>(URL).path(Uris.USERS).body(player).post().build();
@@ -30,5 +39,11 @@ public class RestService {
     public void createCourt(String id) {
         new RestBuilder<Object>(URL).path(Uris.COURTS).param("id", id).basicAuth(this.loginAdmin(), "").post().build();
     }
+
+//    public void createTraining(Calendar initDate, Calendar endDate, int courtId, int userId) {
+//        TrainingWrapper trainingWrapper = new TrainingWrapper(initDate, endDate, courtId, userId);
+//        new RestBuilder<Object>(RestService.URL).path(Uris.TRAINING).basicAuth(this.loginTrainer(), "").body(trainingWrapper).post()
+//                .build();
+//    }
 
 }

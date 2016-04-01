@@ -19,5 +19,15 @@ public class Uris {
     public static final String RESERVES = "/reserves";
     
     public static final String AVAILABILITY = "/availability";
+    
+    public static final String TRAINING = "/training";
+    
+    public static final String CREATE_TRAINING = "/create";
+
+    public static final String DELETE_TRAINING = "/delete";
+
+    public static final String LIST_TRAININGS = "/list";
+
+    public static final String REGISTER_TRAINING = "/registerTraining";
 
 }

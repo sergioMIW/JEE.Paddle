@@ -15,8 +15,9 @@ public class TokenDaoImpl implements TokenDaoExtended {
     public void deleteNotValidToken() {
         List<Token> tokens = tokenDao.findAll();
         for (Token token : tokens){ 
-            if (!token.isValidTime()) 
+            if (!token.isValidTime()){
                 tokenDao.delete(token);
+            }
         }
     }
 

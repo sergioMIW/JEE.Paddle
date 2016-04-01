@@ -26,8 +26,8 @@ public class Token {
 
     @Column(unique = false, nullable = false)
     private long createConnection;
-    
-    public final int TIME_TO_EXPIRED = 3600;
+
+    public final long TIME_TO_EXPIRED = 3600*1000;
 
     public Token() {
     }
